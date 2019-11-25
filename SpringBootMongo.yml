@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  labels:
-    name: springboot
   name: spring-controller
 spec:
-  replicas: 1
+  replicas: 9
+  selector:
+    name: springboot
   template:
     metadata:
       labels:
         name: springboot
     spec:
       containers:
-      - image: tiger5559/spring-boot-mongo
+      - image: tiger5559/spring-boot-mongo:${BUILD_NUMBER}
         name: springboot
         ports:
         - name: springboot
@@ -22,8 +22,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    name: springboot
   name: springboot
 spec:
   type: NodePort
@@ -37,19 +35,18 @@ spec:
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  labels:
-    name: mongo
   name: mongo-controller
 spec:
   replicas: 1
   template:
     metadata:
-      labels:
-        name: mongo
+        name: mongo-pod
+        labels:
+          name: mongo
     spec:
       containers:
       - image: mongo
-        name: mongo
+        name: mongo-cont
         ports:
         - name: mongo
           containerPort: 27017
@@ -66,8 +63,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    name: mongo
   name: mongo
 spec:
   type: ClusterIP
