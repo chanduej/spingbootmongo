@@ -48,6 +48,21 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<distributionManagement>
+	
+	    <repository>
+	      <id>nexus</id>
+	      <name>Test Project Releases Nexus Repository</name>
+	      <url>http://13.235.91.223:8081/repository/testrepo_releases/</url>
+	    </repository>
+	    
+	    <snapshotRepository>
+	      <id>nexus</id>
+	      <name>Test Project Snapshot Nexus Repository </name>
+	      <url>http://13.235.91.223:8081/repository/testrepo_snapshots/</url>
+	    </snapshotRepository>
+	    
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
